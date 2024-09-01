@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gcp-devops-gke
+  name: devops-gke-pyapp-dev-deployment
 spec:
   replicas: 1
   selector:
@@ -14,8 +14,8 @@ spec:
         app: gcp
     spec:
       containers:
-      - name: gcp-devops-gke-pyapp
-        image: gcr.io/steel-binder-384114/gcp-devops-gke-pyapp:latest
+      - name: devops-gke-pyapp-dev
+        image: gcr.io/steel-binder-384114/devops-gke-pyapp-dev:latest
         ports:
         - containerPort: 5000
         env:
@@ -27,8 +27,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gcp-devops-gke-service
-  namespace: gcp-devops-prod
+  name: devops-gke-pyapp-dev-service
+  namespace: gcp-devops-dev
   labels:
     app.kubernetes.io/managed-by: "gcp-cloud-build-deploy"
 spec:
@@ -36,7 +36,7 @@ spec:
     app: gcp
   ports:
     - protocol: "TCP"
-      port: 80
+      port: 8080
       targetPort: 5000
   type: "LoadBalancer"
 
