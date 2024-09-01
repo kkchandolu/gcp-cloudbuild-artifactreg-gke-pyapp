@@ -5,3 +5,6 @@ steps:
 
 images:
   - 'gcr.io/${PROJECT_ID}/gcp-devops-gke-pyapp'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
