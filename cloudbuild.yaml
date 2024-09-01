@@ -1,21 +1,21 @@
 steps:
   # Docker Build (produce container image)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/gcp-devops-gke-pyapp', '.']
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/devops-gke-pyapp-dev', '.']
 
   # Docker Push (store container image to Artifact Registry)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/${PROJECT_ID}/gcp-devops-gke-pyapp' ]
+    args: ['push', 'gcr.io/${PROJECT_ID}/devops-gke-pyapp-dev' ]
 
   # Deploy to GKE (deploy container image to GKE)
   - name: 'gcr.io/cloud-builders/gke-deploy'
     args:
       - run
       - --filename=gke.yml
-      - --image=gcr.io/${PROJECT_ID}/gcp-devops-gke-pyapp
+      - --image=gcr.io/${PROJECT_ID}/devops-gke-pyapp-dev
       - --location=us-central1-c
       - --cluster=gcp-devops-project
-      - --namespace=gcp-devops-prod
+      - --namespace=gcp-devops-dev
 
 options:
   logging: CLOUD_LOGGING_ONLY
