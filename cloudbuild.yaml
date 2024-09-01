@@ -6,3 +6,9 @@ steps:
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/${PROJECT_ID}/gcp-devops-gke/pyapp']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  
+  #serviceAccount: cloudbuilduser@steel-binder-384114.iam.gserviceaccount.com
+  #logsBucket: my-build-logs
